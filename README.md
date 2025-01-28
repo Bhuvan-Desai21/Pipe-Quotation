@@ -3,7 +3,8 @@ A Flask-based web application for generating customized quotations for a hardwar
 
 ## Video Demo
 
-[![Project Demo](https://img.youtube.com/vi/https://youtu.be/e2yccYQkpQo/0.jpg)](https://www.youtube.com/watch?v=https://youtu.be/e2yccYQkpQo "Project Demo")
+[![Watch the video](https://img.youtube.com/vi/e2yccYQkpQo/maxresdefault.jpg)](https://youtu.be/e2yccYQkpQo)
+
 
 
 ## Features
