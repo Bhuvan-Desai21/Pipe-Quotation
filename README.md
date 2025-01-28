@@ -1,6 +1,11 @@
 # Raichur Hardware Quotation Generator
 A Flask-based web application for generating customized quotations for a hardware business, featuring dynamic pricing, discount management, and PDF generation.
 
+## Video Demo
+
+[![Project Demo](https://img.youtube.com/vi/https://youtu.be/e2yccYQkpQo/0.jpg)](https://www.youtube.com/watch?v=https://youtu.be/e2yccYQkpQo "Project Demo")
+
+
 ## Features
 
 ### Core Functionalities
