@@ -1,0 +1,185 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #444;
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    background-color: #444;
+}
+
+header nav a:hover {
+    background-color: #555;
+}
+
+/* Form Elements */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+form input[type="text"], form input[type="number"], form input[type="hidden"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Discount Section */
+.discount-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.discount-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.discount-list input[type="text"] {
+    width: 80px;
+}
+
+.discount-list button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.discount-list button:hover {
+    background-color: #218838;
+}
+
+/* Cart Section */
+.cart-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Total Price */
+.total-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: right;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 0;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    header nav {
+        flex-direction: column;
+    }
+
+    header nav a {
+        margin-bottom: 10px;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    form input[type="text"], form input[type="number"] {
+        width: 100%;
+    }
+
+    .discount-list, .cart-list {
+        margin-top: 20px;
+    }
+}

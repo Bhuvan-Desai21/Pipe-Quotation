@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipe Shopping</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Search for Pipes</h1>
+
+    <form method="post" action="/add_to_cart">
+        <label for="pipe_name">Pipe Name:</label>
+        <input type="text" id="pipe_name" name="pipe_name" placeholder="Start typing pipe name...">
+        <div id="suggestions" style="display: none;">
+            <ul id="suggestions-list"></ul>
+        </div>
+        <label for="quantity">Quantity:</label>
+        <input type="text" name="quantity">
+        <button type="submit">Add to Cart</button>
+    </form>
+
+    <a href="/cart">View Cart</a>
+    <a href="/discounts">Edit Discounts</a>
+    <a href="/features">Other Features</a>
+
+    <script>
+        $(document).ready(function(){
+            // Event listener for input field
+            $('#pipe_name').on('input', function() {
+                var query = $(this).val();
+                if (query.length > 1) {  // Start search after 2 characters
+                    $.ajax({
+                        type: 'POST',
+                        url: '/search',
+                        data: { search: query },
+                        success: function(data) {
+                            if (data.suggestions.length > 0) {
+                                $('#suggestions').show();
+                                $('#suggestions-list').empty();
+                                data.suggestions.forEach(function(pipe) {
+                                    $('#suggestions-list').append('<li>' + pipe + '</li>');
+                                });
+                            } else {
+                                $('#suggestions').hide();
+                            }
+                        }
+                    });
+                } else {
+                    $('#suggestions').hide();
+                }
+            });
+
+            // Handle suggestion click
+            $(document).on('click', '#suggestions-list li', function() {
+                var selectedPipe = $(this).text();
+                $('#pipe_name').val(selectedPipe);
+                $('#suggestions').hide();
+            });
+        });
+    </script>
+
+    {% if suggestions %}
+        <h2>Suggestions</h2>
+        <ul>
+            {% for pipe in suggestions %}
+            <li>{{ pipe }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

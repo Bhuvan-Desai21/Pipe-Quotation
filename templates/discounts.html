@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Discounts</title>
+    <link rel="stylesheet" href="static/styles.css">
+
+</head>
+<body>
+    <h1>Edit Discounts</h1>
+    
+    <h3>Current Discounts</h3>
+    <form method="POST">
+        <ul>
+            {% for discount in discounts %}
+                <li>
+                    <label>{{ discount['discounts'] }}: </label>
+                    <input type="hidden" name="discount_name" value="{{ discount['discounts'] }}">
+                    <input type="text" name="new_percent" value="{{ discount['percent'] }}" required>
+                    <button type="submit">Update</button>
+                </li>
+            {% endfor %}
+        </ul>
+    </form>
+
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>

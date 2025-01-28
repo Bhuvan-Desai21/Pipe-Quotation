@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Cart</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Cart</h1>
+
+        <!-- Display cart items -->
+        <div class="cart-items">
+            {% for item in cart %}
+                <p>{{ item.name }} (x{{ item.quantity }}) - ₹{{ item.price }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- Discount Selection Form -->
+        <h2>Select Discounts</h2>
+        <form action="{{ url_for('calculate_total') }}" method="POST">
+            <div>
+                {% for discount in discounts %}
+                    <label>
+                        <input type="checkbox" name="discounts" value="{{ discount }}">{{ discount }}
+                    </label><br>
+                {% endfor %}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Apply Discounts</button>
+        </form>
+
+        <!-- Display Selected Discounts -->
+        <h2>Selected Discounts</h2>
+        <ul>
+            {% for discount in selected_discounts %}
+                <li>{{ discount }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Total Price -->
+        <h2>Total Price: ₹{{ total_price }}</h2>
+
+        <h2>Customer Details</h2>
+        <form id="customer-details-form" method="POST" action="/generate-quotation">
+            <div>
+                <label for="customer-name">Customer Name:</label>
+                <input type="text" id="customer-name" name="customer_name" required><br><br>
+
+                <label for="delivery-place">Place of Delivery:</label>
+                <input type="text" id="delivery-place" name="delivery_place" required><br><br>
+
+                <label for="pin-code">Pin Code:</label>
+                <input type="text" id="pin-code" name="pin_code" pattern="\d{6}" title="Please enter a valid 6-digit pin code" required><br><br>
+
+                <label for="distance">Approx Distance from Raichur (in km):</label>
+                <input type="number" id="distance" name="distance" min="0" required><br><br>
+
+                <label for="contact-1">Contact Number 1:</label>
+                <input type="text" id="contact-1" name="contact_number_1" pattern="\d{10}" title="Please enter a valid 10-digit contact number" required><br><br>
+
+                <label for="contact-2">Contact Number 2:</label>
+                <input type="text" id="contact-2" name="contact_number_2" pattern="\d{10}" title="Please enter a valid 10-digit contact number"><br><br>
+            </div>
+        </form>
+        
+        <!-- Generate Quotation Form -->
+        <form id="generate-quotation-form" method="POST" action="/generate-quotation">
+            <input type="hidden" id="cart-data" name="cart">
+            <input type="hidden" id="discount-data" name="discounts">
+            <input type="hidden" id="total-price" name="total_price">
+            <input type="hidden" id="hidden-customer-name" name="customer_name">
+            <input type="hidden" id="hidden-delivery-place" name="delivery_place">
+            <input type="hidden" id="hidden-pin-code" name="pin_code">
+            <input type="hidden" id="hidden-distance" name="distance">
+            <input type="hidden" id="hidden-contact-1" name="contact_number_1">
+            <input type="hidden" id="hidden-contact-2" name="contact_number_2">
+            <input type="hidden" id="customer-details" name="customer_details">
+
+            <button type="submit" class="btn btn-primary">Generate Quotation</button>
+        </form>
+
+        <!-- Or use JavaScript to generate quotation -->
+        
+    </div>
+
+    <script>
+        // Pass data to the form before submission
+        document.getElementById("generate-quotation-form").addEventListener("submit", function (e) {
+        // Ensure Jinja2 expressions are properly embedded as JavaScript variables
+            const cart = JSON.parse('{{ cart | default([]) | tojson | safe }}');
+            const discounts = JSON.parse('{{ selected_discounts | default([]) | tojson | safe }}');
+            const totalPrice = JSON.parse('{{ total_price | default(0) | tojson | safe }}');
+
+            // Get customer details from the form
+            const customerName = document.getElementById("customer-name").value;
+            const deliveryPlace = document.getElementById("delivery-place").value;
+            const pinCode = document.getElementById("pin-code").value;
+            const distance = document.getElementById("distance").value;
+            const contactNumber1 = document.getElementById("contact-1").value;
+            const contactNumber2 = document.getElementById("contact-2").value;
+
+            // Set hidden input values
+            document.getElementById("cart-data").value = JSON.stringify(cart);
+            document.getElementById("discount-data").value = JSON.stringify(discounts);
+            document.getElementById("total-price").value = totalPrice;
+
+            // Pass customer details as JSON
+            document.getElementById("hidden-customer-name").value = customerName;
+            document.getElementById("hidden-delivery-place").value = deliveryPlace;
+            document.getElementById("hidden-pin-code").value = pinCode;
+            document.getElementById("hidden-distance").value = distance;
+            document.getElementById("hidden-contact-1").value = contactNumber1;
+            document.getElementById("hidden-contact-2").value = contactNumber2;
+        })
+
+        // Generate Quotation using JavaScript
+        
+    </script>
+
+    <a href="{{ url_for('index') }}">Back to Home</a>    
+</body>
+</html>
