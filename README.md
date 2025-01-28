@@ -6,7 +6,7 @@ A Flask-based web application for generating customized quotations for a hardwar
 [![Watch the video](https://img.youtube.com/vi/e2yccYQkpQo/maxresdefault.jpg)](https://youtu.be/e2yccYQkpQo)
 
 ## Sample Quotation Generated
-[View the PDF](.quotation_Bhu_2025-01-15.pdf)
+[View the PDF](quotation_Bhu_2025-01-15.pdf)
 
 ## Features
 
